@@ -14,7 +14,7 @@ public class SpringBootDemoController {
 
   @Autowired
   private CategoryService categoryService;
-  
+
   public ItemService getItemService() {
     if (itemService == null) {
       throw new RuntimeException("ItemService not configured. Cannot continue.");
