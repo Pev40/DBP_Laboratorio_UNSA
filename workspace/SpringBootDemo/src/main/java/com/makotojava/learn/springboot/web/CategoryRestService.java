@@ -3,6 +3,7 @@ package com.makotojava.learn.springboot.web;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.makotojava.learn.odot.exception.ServiceException;
 import com.makotojava.learn.odot.model.Category;
 import com.makotojava.learn.springboot.SpringBootDemoController;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/CategoryRestService")
 public class CategoryRestService extends SpringBootDemoController {

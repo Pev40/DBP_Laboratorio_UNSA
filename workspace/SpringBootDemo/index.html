@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const url = "http://localhost:8080/CategoryRestService/FindAll";
+            const url2 = "http://localhost:8080/CategoryRestService/FindById/1";
+            const url3 = "http://localhost:8080/CategoryRestService/Update";
+            $("#btn-Ajax").click(function () {
+                $.ajax({
+                    url: url2, success: function (result) {
+                        alert("AJAX SUCCESS");
+                        console.log(result);
+                    }
+                });
+            });
+            $("#btn-Get").click(function () {
+                $.get(url, function (data, status) {
+                    alert("GET SUCCESS");
+                    console.log(data)
+                });
+            });
+            $("#btn-AjaxPost").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: url3,
+                    contentType: 'application/json',
+                    data: JSON.stringify(                    {
+                        description: "PRueba de actualizacion",
+                        id: 1,
+                        name: "Mando una prueba",
+                        whenCreated: "2021-07-24",
+                        whenLastUpdated: "2021-04-04"
+                    }),
+                    success: function (result) {
+                        console.log(result)
+                        var obj=result,
+                            h3 = $("<div>");
+                        h3.append("<p> " + result + "<p>")
+
+                        $("#ResultadoAjaxPost").append(h3);
+                    },
+                    error: function (xhr, status) {
+                        console.log(xhr);
+                    }
+                });
+            });
+            $("#btn-AjaxClase").click(function () {
+                $.ajax({
+                    url: "http://localhost:8080/ItemRestService/FindAll",
+                    success: function (result) {
+                        console.log(result);
+                        var obj = result,  // get entry object (array) from JSON data
+                            ul = $("<ul>");                    // create a new ul element
+                        // iterate over the array and build the list
+                        for (var i = 0, l = obj.length; i < l; ++i) {
+                            ul.append("<li> " + obj[i].id + " --- " + obj[i].description + "</li>");
+                        }
+                        $("#ResultadoAjaxClase").append(ul); 
+                        }
+                });
+            });
+        });
+    </script>
+
+    <title class="display-1">Pruebas Ajax</title>
+</head>
+
+<body>
+
+    <h1 class="display-1 m-0 row justify-content-center display-1">Bienvenido</h1>
+<h2 class="h2">CONSULTA ALGO CON AJAX</h2>
+ <div class="m-0 row justify-content-center">
+    <button id="btn-Ajax" class="btn btn-primary">Coneccion Ajax</button>
+    <button id="btn-Get" class="btn btn-primary">Conneccion por GET</button>
+    <button id="btn-AjaxPost" class="btn btn-primary">Conneccion por POST</button>
+
+
+
+    <div id="ResultadoAjaxPost"><h2>MOSTRAR RESULTADOS AJAX POSTt</h2></div>
+
+    <div id="ResultadoAjaxClase"><h2>RESULTADOS AJAX</h2></div>
+
+</div>
+
+
+
+</body>
+
+</html>

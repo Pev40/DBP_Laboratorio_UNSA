@@ -7,9 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.makotojava.learn.odot.config.AbstractApplicationConfiguration;
-
+@CrossOrigin(origins = "*")
 @Configuration
 public class SpringBootDemoConfiguration extends AbstractApplicationConfiguration {
 
